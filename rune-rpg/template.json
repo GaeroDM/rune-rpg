@@ -1,0 +1,61 @@
+{
+  "Actor": {
+    "types": ["character", "npc"],
+    "templates": {
+      "base": {
+        "abordagens": {
+          "poder": 0,
+          "astucia": 0,
+          "visao": 0
+        },
+        "vigor": {
+          "value": 10,
+          "max": 10
+        },
+        "resistencias": {
+          "armadura": 0,
+          "res_magica": 0
+        }
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "ancestralidade": "",
+      "origem": "",
+      "caminho": "",
+      "especializacao": "",
+      "descricao": "",
+      "anotacoes": ""
+    },
+    "npc": {
+      "templates": ["base"],
+      "descricao": ""
+    }
+  },
+  "Item": {
+    "types": ["invenção", "magia", "equipamento", "arma"],
+    "templates": {},
+    "invenção": {
+      "descricao": "",
+      "ingredientes": "",
+      "cargas": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "magia": {
+      "descricao": "",
+      "dominio": "",
+      "palavras": ""
+    },
+    "equipamento": {
+      "descricao": "",
+      "tipo": ""
+    },
+    "arma": {
+      "descricao": "",
+      "tipo": "",
+      "alcance": ""
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "RUNE.SheetCharacter": "Ficha de Personagem",
+  "RUNE.SheetItem": "Item",
+
+  "RUNE.Actor.Nome": "Nome",
+  "RUNE.Actor.Pronomes": "Pronomes",
+  "RUNE.Actor.Ancestralidade": "Ancestralidade",
+  "RUNE.Actor.Origem": "Origem",
+  "RUNE.Actor.Caminho": "Caminho",
+  "RUNE.Actor.Especializacao": "Especialização",
+  "RUNE.Actor.Descricao": "Descrição",
+  "RUNE.Actor.Anotacoes": "Anotações",
+
+  "RUNE.Abordagem.Poder": "Poder",
+  "RUNE.Abordagem.Astucia": "Astúcia",
+  "RUNE.Abordagem.Visao": "Visão",
+
+  "RUNE.Status.Vigor": "VIGOR",
+  "RUNE.Status.Armadura": "ARMADURA",
+  "RUNE.Status.ResMagica": "RES. MÁGICA",
+
+  "RUNE.Roll.Rolar": "Rolar",
+  "RUNE.Roll.Cancelar": "Cancelar",
+  "RUNE.Roll.Abordagem": "Abordagem",
+  "RUNE.Roll.Vantagens": "Vantagens",
+  "RUNE.Roll.Desvantagens": "Desvantagens",
+  "RUNE.Roll.Bonus": "Bônus (d4)",
+  "RUNE.Roll.RolagemLivre": "Rolagem Livre",
+  "RUNE.Roll.RolagemIndividual": "Rolagem Individual",
+  "RUNE.Roll.Modo.Normal": "Normal",
+  "RUNE.Roll.Modo.Vantagem": "Vantagem",
+  "RUNE.Roll.Modo.Desvantagem": "Desvantagem",
+
+  "RUNE.Resultado.Sucesso": "Sucesso",
+  "RUNE.Resultado.Complicacao": "Complicação",
+  "RUNE.Resultado.Desastre": "Desastre",
+  "RUNE.Resultado.Gloria": "Glória",
+  "RUNE.Resultado.Ruina": "Ruína",
+
+  "RUNE.Item.Tipos.Invencao": "Invenção",
+  "RUNE.Item.Tipos.Magia": "Magia",
+  "RUNE.Item.Tipos.Arma": "Arma",
+  "RUNE.Item.Tipos.Equipamento": "Equipamento",
+
+  "RUNE.Item.Cargas": "Cargas",
+  "RUNE.Item.Ingredientes": "Ingredientes / Componentes",
+  "RUNE.Item.Dominio": "Domínio",
+  "RUNE.Item.Palavras": "Palavras / Componentes",
+  "RUNE.Item.Alcance": "Alcance",
+  "RUNE.Item.Tipo": "Tipo",
+  "RUNE.Item.Descricao": "Descrição",
+
+  "RUNE.Item.Dominio.Celestial": "Celestial",
+  "RUNE.Item.Dominio.Espiritual": "Espiritual",
+  "RUNE.Item.Dominio.Elemental": "Elemental",
+
+  "RUNE.Secao.Abordagens": "Abordagens",
+  "RUNE.Secao.Invencoes": "Invenções",
+  "RUNE.Secao.Armas": "Armas",
+  "RUNE.Secao.Equipamentos": "Equipamentos",
+  "RUNE.Secao.Magias": "Magias",
+  "RUNE.Secao.Tracos": "Traços",
+
+  "RUNE.Tab.Principal": "Principal",
+  "RUNE.Tab.Itens": "Itens",
+  "RUNE.Tab.Descricao": "Descrição"
+}

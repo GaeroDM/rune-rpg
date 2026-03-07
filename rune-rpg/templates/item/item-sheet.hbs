@@ -1,0 +1,100 @@
+<form class="{{cssClass}} rune-sheet rune-item-sheet" autocomplete="off">
+
+  {{!-- ═══ HEADER ═══ --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="itemname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="Nome do Item"/>
+      </h1>
+      <div class="item-type-tag">{{item.type}}</div>
+    </div>
+  </header>
+
+  {{!-- ═══ CORPO ═══ --}}
+  <section class="sheet-body item-body">
+
+    {{!-- ─── INVENÇÃO ─── --}}
+    {{#if (eq item.type "invenção")}}
+      <div class="form-group">
+        <label>Cargas</label>
+        <div class="inline-inputs">
+          <input type="number" name="system.cargas.value"
+            value="{{system.cargas.value}}" min="0" max="{{system.cargas.max}}"/>
+          <span>/</span>
+          <input type="number" name="system.cargas.max"
+            value="{{system.cargas.max}}" min="0"/>
+        </div>
+      </div>
+      <div class="form-group stacked">
+        <label>Ingredientes / Componentes</label>
+        <textarea name="system.ingredientes" rows="3"
+          placeholder="Materiais necessários para construção, reparo etc.">{{system.ingredientes}}</textarea>
+      </div>
+      <div class="form-group stacked">
+        <label>Descrição</label>
+        <textarea name="system.descricao" rows="5"
+          placeholder="Descreva a invenção...">{{system.descricao}}</textarea>
+      </div>
+    {{/if}}
+
+    {{!-- ─── MAGIA ─── --}}
+    {{#if (eq item.type "magia")}}
+      <div class="form-group">
+        <label>Domínio</label>
+        <select name="system.dominio">
+          <option value="" {{#if (eq system.dominio "")}}selected{{/if}}>— Selecione —</option>
+          <option value="Celestial" {{#if (eq system.dominio "Celestial")}}selected{{/if}}>Celestial</option>
+          <option value="Espiritual" {{#if (eq system.dominio "Espiritual")}}selected{{/if}}>Espiritual</option>
+          <option value="Elemental" {{#if (eq system.dominio "Elemental")}}selected{{/if}}>Elemental</option>
+        </select>
+      </div>
+      <div class="form-group stacked">
+        <label>Palavras / Componentes</label>
+        <input type="text" name="system.palavras"
+          value="{{system.palavras}}"
+          placeholder="Ex: Fogo + Criação"/>
+      </div>
+      <div class="form-group stacked">
+        <label>Descrição</label>
+        <textarea name="system.descricao" rows="6"
+          placeholder="Descreva o efeito da magia...">{{system.descricao}}</textarea>
+      </div>
+    {{/if}}
+
+    {{!-- ─── ARMA ─── --}}
+    {{#if (eq item.type "arma")}}
+      <div class="form-group">
+        <label>Tipo</label>
+        <input type="text" name="system.tipo"
+          value="{{system.tipo}}" placeholder="Ex: Corpo a corpo, Arremesso"/>
+      </div>
+      <div class="form-group">
+        <label>Alcance</label>
+        <input type="text" name="system.alcance"
+          value="{{system.alcance}}" placeholder="Ex: Curto, Médio, Longo"/>
+      </div>
+      <div class="form-group stacked">
+        <label>Descrição</label>
+        <textarea name="system.descricao" rows="6"
+          placeholder="Descreva a arma...">{{system.descricao}}</textarea>
+      </div>
+    {{/if}}
+
+    {{!-- ─── EQUIPAMENTO ─── --}}
+    {{#if (eq item.type "equipamento")}}
+      <div class="form-group">
+        <label>Tipo</label>
+        <input type="text" name="system.tipo"
+          value="{{system.tipo}}" placeholder="Ex: Armadura, Acessório, Consumível"/>
+      </div>
+      <div class="form-group stacked">
+        <label>Descrição</label>
+        <textarea name="system.descricao" rows="8"
+          placeholder="Descreva o equipamento...">{{system.descricao}}</textarea>
+      </div>
+    {{/if}}
+
+  </section>
+
+</form>

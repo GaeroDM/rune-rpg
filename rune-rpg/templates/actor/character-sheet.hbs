@@ -1,0 +1,207 @@
+<form class="{{cssClass}} rune-sheet" autocomplete="off">
+
+  {{!-- ═══ HEADER ═══ --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="Nome do Personagem"/>
+      </h1>
+      <div class="header-info">
+        <div class="form-group">
+          <label>Pronomes</label>
+          <input type="text" name="system.pronomes" value="{{system.pronomes}}" placeholder="Pronomes"/>
+        </div>
+        <div class="form-group">
+          <label>Ancestralidade</label>
+          <input type="text" name="system.ancestralidade" value="{{system.ancestralidade}}"/>
+        </div>
+        <div class="form-group">
+          <label>Origem</label>
+          <input type="text" name="system.origem" value="{{system.origem}}"/>
+        </div>
+        <div class="form-group">
+          <label>Caminho</label>
+          <input type="text" name="system.caminho" value="{{system.caminho}}"/>
+        </div>
+        <div class="form-group">
+          <label>Especialização</label>
+          <input type="text" name="system.especializacao" value="{{system.especializacao}}"/>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{!-- ═══ TABS ═══ --}}
+  <nav class="sheet-tabs tabs">
+    <a class="item" data-tab="principal">Principal</a>
+    <a class="item" data-tab="itens">Itens</a>
+    <a class="item" data-tab="descricao">Descrição</a>
+  </nav>
+
+  <section class="sheet-body">
+
+    {{!-- ═══ ABA PRINCIPAL ═══ --}}
+    <div class="tab principal" data-tab="principal">
+
+      {{!-- Status --}}
+      <div class="status-row">
+
+        {{!-- VIGOR --}}
+        <div class="status-box vigor-box">
+          <label>❤️ VIGOR</label>
+          <div class="status-inputs">
+            <input class="vigor-input" type="number" data-field="value"
+              value="{{system.vigor.value}}" min="0" max="{{system.vigor.max}}"/>
+            <span>/</span>
+            <input class="vigor-input" type="number" data-field="max"
+              value="{{system.vigor.max}}" min="0"/>
+          </div>
+          <progress class="vigor-bar" value="{{system.vigor.value}}" max="{{system.vigor.max}}"></progress>
+        </div>
+
+        {{!-- ARMADURA --}}
+        <div class="status-box">
+          <label>🛡️ ARMADURA</label>
+          <input type="number" name="system.resistencias.armadura"
+            value="{{system.resistencias.armadura}}" min="0"/>
+        </div>
+
+        {{!-- RES. MÁGICA --}}
+        <div class="status-box">
+          <label>🔷 RES. MÁGICA</label>
+          <input type="number" name="system.resistencias.res_magica"
+            value="{{system.resistencias.res_magica}}" min="0"/>
+        </div>
+
+      </div>
+
+      {{!-- Abordagens --}}
+      <div class="abordagens-section">
+        <h3>Abordagens</h3>
+        <div class="abordagens-grid">
+          {{#each abordagens}}
+          <div class="abordagem-box">
+            <label>{{this.label}}</label>
+            <input type="number" name="system.abordagens.{{this.key}}"
+              value="{{lookup ../system.abordagens this.key}}" min="0"/>
+            <button type="button" class="roll-abordagem" data-abordagem="{{this.key}}">
+              🎲 Rolar
+            </button>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      {{!-- Rolagens Individuais --}}
+      <div class="rolagens-individuais">
+        <h3>Rolagens Individuais</h3>
+        <div class="dados-row">
+          <button type="button" class="roll-individual" data-formula="1d6" data-label="1d6">🎲 1d6</button>
+          <button type="button" class="roll-individual" data-formula="1d4" data-label="1d4 (Bônus)">🎲 1d4</button>
+          <button type="button" class="roll-livre">🎲 Rolagem Livre</button>
+        </div>
+      </div>
+
+      {{!-- Invenções --}}
+      <div class="invencoes-section">
+        <h3>Invenções
+          <button type="button" class="item-create" data-tipo="invenção">+</button>
+        </h3>
+        {{#each actor.items}}
+          {{#if (eq this.type "invenção")}}
+          <div class="item" data-item-id="{{this.id}}">
+            <span class="item-name">{{this.name}}</span>
+            <span class="item-cargas">
+              <input class="carga-input" type="number" data-field="value"
+                value="{{this.system.cargas.value}}" min="0" max="{{this.system.cargas.max}}"/>
+              /
+              <input class="carga-input" type="number" data-field="max"
+                value="{{this.system.cargas.max}}" min="0"/>
+            </span>
+            <div class="item-controls">
+              <a class="item-edit">✏️</a>
+              <a class="item-delete">🗑️</a>
+            </div>
+          </div>
+          {{/if}}
+        {{/each}}
+      </div>
+
+    </div>
+
+    {{!-- ═══ ABA ITENS ═══ --}}
+    <div class="tab itens" data-tab="itens">
+
+      {{!-- Armas --}}
+      <div class="itens-section">
+        <h3>Armas
+          <button type="button" class="item-create" data-tipo="arma">+</button>
+        </h3>
+        {{#each actor.items}}
+          {{#if (eq this.type "arma")}}
+          <div class="item" data-item-id="{{this.id}}">
+            <span class="item-name">{{this.name}}</span>
+            <span class="item-tag">{{this.system.alcance}}</span>
+            <div class="item-controls">
+              <a class="item-edit">✏️</a>
+              <a class="item-delete">🗑️</a>
+            </div>
+          </div>
+          {{/if}}
+        {{/each}}
+      </div>
+
+      {{!-- Equipamentos --}}
+      <div class="itens-section">
+        <h3>Equipamentos
+          <button type="button" class="item-create" data-tipo="equipamento">+</button>
+        </h3>
+        {{#each actor.items}}
+          {{#if (eq this.type "equipamento")}}
+          <div class="item" data-item-id="{{this.id}}">
+            <span class="item-name">{{this.name}}</span>
+            <div class="item-controls">
+              <a class="item-edit">✏️</a>
+              <a class="item-delete">🗑️</a>
+            </div>
+          </div>
+          {{/if}}
+        {{/each}}
+      </div>
+
+      {{!-- Magias --}}
+      <div class="itens-section">
+        <h3>Magias
+          <button type="button" class="item-create" data-tipo="magia">+</button>
+        </h3>
+        {{#each actor.items}}
+          {{#if (eq this.type "magia")}}
+          <div class="item" data-item-id="{{this.id}}">
+            <span class="item-name">{{this.name}}</span>
+            <span class="item-tag">{{this.system.dominio}}</span>
+            <div class="item-controls">
+              <a class="item-edit">✏️</a>
+              <a class="item-delete">🗑️</a>
+            </div>
+          </div>
+          {{/if}}
+        {{/each}}
+      </div>
+
+    </div>
+
+    {{!-- ═══ ABA DESCRIÇÃO ═══ --}}
+    <div class="tab descricao" data-tab="descricao">
+      <div class="form-group stacked">
+        <label>Descrição</label>
+        <textarea name="system.descricao" rows="8">{{system.descricao}}</textarea>
+      </div>
+      <div class="form-group stacked">
+        <label>Anotações</label>
+        <textarea name="system.anotacoes" rows="6">{{system.anotacoes}}</textarea>
+      </div>
+    </div>
+
+  </section>
+</form>
