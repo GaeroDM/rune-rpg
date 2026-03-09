@@ -46,8 +46,6 @@
 
       {{!-- Status --}}
       <div class="status-row">
-
-        {{!-- VIGOR --}}
         <div class="status-box vigor-box">
           <label>❤️ VIGOR</label>
           <div class="status-inputs">
@@ -59,21 +57,44 @@
           </div>
           <progress class="vigor-bar" value="{{system.vigor.value}}" max="{{system.vigor.max}}"></progress>
         </div>
-
-        {{!-- ARMADURA --}}
         <div class="status-box">
           <label>🛡️ ARMADURA</label>
           <input type="number" name="system.resistencias.armadura"
             value="{{system.resistencias.armadura}}" min="0"/>
         </div>
-
-        {{!-- RES. MÁGICA --}}
         <div class="status-box">
           <label>🔷 RES. MÁGICA</label>
           <input type="number" name="system.resistencias.res_magica"
             value="{{system.resistencias.res_magica}}" min="0"/>
         </div>
+      </div>
 
+      {{!-- Contadores --}}
+      <div class="contadores-row">
+        <div class="contador-box">
+          <label>Vantagens</label>
+          <div class="contador-controles">
+            <button type="button" class="contador-btn" data-tipo="vantagem" data-dir="down">−</button>
+            <input class="contador-vantagem" type="number" value="{{vantagens}}" min="0"/>
+            <button type="button" class="contador-btn" data-tipo="vantagem" data-dir="up">+</button>
+          </div>
+        </div>
+        <div class="contador-box">
+          <label>Desvantagens</label>
+          <div class="contador-controles">
+            <button type="button" class="contador-btn" data-tipo="desvantagem" data-dir="down">−</button>
+            <input class="contador-desvantagem" type="number" value="{{desvantagens}}" min="0"/>
+            <button type="button" class="contador-btn" data-tipo="desvantagem" data-dir="up">+</button>
+          </div>
+        </div>
+        <div class="contador-box">
+          <label>Bônus (d4)</label>
+          <div class="contador-controles">
+            <button type="button" class="contador-btn" data-tipo="bonus" data-dir="down">−</button>
+            <input class="contador-bonus" type="number" value="{{bonus}}" min="0"/>
+            <button type="button" class="contador-btn" data-tipo="bonus" data-dir="up">+</button>
+          </div>
+        </div>
       </div>
 
       {{!-- Abordagens --}}
@@ -97,9 +118,8 @@
       <div class="rolagens-individuais">
         <h3>Rolagens Individuais</h3>
         <div class="dados-row">
-          <button type="button" class="roll-individual" data-formula="1d6" data-label="1d6">🎲 1d6</button>
-          <button type="button" class="roll-individual" data-formula="1d4" data-label="1d4 (Bônus)">🎲 1d4</button>
-          <button type="button" class="roll-livre">🎲 Rolagem Livre</button>
+          <button type="button" class="roll-individual" data-formula="1d6" data-label="Vantagem (1d6)">🎲 Vantagem</button>
+          <button type="button" class="roll-individual" data-formula="1d4" data-label="Bônus (1d4)">🎲 Bônus</button>
         </div>
       </div>
 
@@ -132,12 +152,8 @@
 
     {{!-- ═══ ABA ITENS ═══ --}}
     <div class="tab itens" data-tab="itens">
-
-      {{!-- Armas --}}
       <div class="itens-section">
-        <h3>Armas
-          <button type="button" class="item-create" data-tipo="arma">+</button>
-        </h3>
+        <h3>Armas <button type="button" class="item-create" data-tipo="arma">+</button></h3>
         {{#each actor.items}}
           {{#if (eq this.type "arma")}}
           <div class="item" data-item-id="{{this.id}}">
@@ -151,12 +167,8 @@
           {{/if}}
         {{/each}}
       </div>
-
-      {{!-- Equipamentos --}}
       <div class="itens-section">
-        <h3>Equipamentos
-          <button type="button" class="item-create" data-tipo="equipamento">+</button>
-        </h3>
+        <h3>Equipamentos <button type="button" class="item-create" data-tipo="equipamento">+</button></h3>
         {{#each actor.items}}
           {{#if (eq this.type "equipamento")}}
           <div class="item" data-item-id="{{this.id}}">
@@ -169,12 +181,8 @@
           {{/if}}
         {{/each}}
       </div>
-
-      {{!-- Magias --}}
       <div class="itens-section">
-        <h3>Magias
-          <button type="button" class="item-create" data-tipo="magia">+</button>
-        </h3>
+        <h3>Magias <button type="button" class="item-create" data-tipo="magia">+</button></h3>
         {{#each actor.items}}
           {{#if (eq this.type "magia")}}
           <div class="item" data-item-id="{{this.id}}">
@@ -188,7 +196,6 @@
           {{/if}}
         {{/each}}
       </div>
-
     </div>
 
     {{!-- ═══ ABA DESCRIÇÃO ═══ --}}

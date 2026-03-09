@@ -1,33 +1,39 @@
 /* ═══════════════════════════════════════════
-   RUNE RPG — Stylesheet
+   RUNE RPG — Stylesheet (Fiel à ficha oficial)
    ═══════════════════════════════════════════ */
 
 /* ─── Variáveis ─────────────────────────── */
 :root {
-  --rune-bg:          #1a1a2e;
-  --rune-bg-light:    #16213e;
-  --rune-bg-card:     #0f3460;
-  --rune-accent:      #e94560;
-  --rune-gold:        #f5a623;
-  --rune-text:        #e0e0e0;
-  --rune-text-muted:  #9a9a9a;
-  --rune-border:      #2a2a4a;
-  --rune-success:     #4caf50;
-  --rune-complicacao: #ff9800;
-  --rune-desastre:    #f44336;
-  --rune-gloria:      #ffd700;
-  --rune-ruina:       #9c27b0;
-  --rune-radius:      6px;
+  --rune-bg:           #f5f0e8;
+  --rune-bg-light:     #ede8dc;
+  --rune-bg-card:      #e8e2d4;
+  --rune-bg-dark:      #2b2118;
+  --rune-accent:       #c8621a;
+  --rune-accent-light: #e07830;
+  --rune-gold:         #b8860b;
+  --rune-text:         #1e1a14;
+  --rune-text-muted:   #6b5e4a;
+  --rune-border:       #c4b89a;
+  --rune-border-dark:  #8a7560;
+  --rune-vigor:        #c0392b;
+  --rune-armadura:     #5d6d7e;
+  --rune-magica:       #6c3483;
+  --rune-success:      #1e8449;
+  --rune-complicacao:  #b7770d;
+  --rune-desastre:     #922b21;
+  --rune-gloria:       #b8860b;
+  --rune-ruina:        #6c3483;
+  --rune-radius:       5px;
 }
 
 /* ─── Base da Ficha ─────────────────────── */
 .rune-sheet {
   background: var(--rune-bg);
   color: var(--rune-text);
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Georgia", "Times New Roman", serif;
   font-size: 13px;
   border-radius: var(--rune-radius);
-  overflow: hidden;
+  border: 2px solid var(--rune-border-dark);
 }
 
 .rune-sheet input,
@@ -40,6 +46,7 @@
   padding: 4px 8px;
   width: 100%;
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 .rune-sheet input:focus,
@@ -47,6 +54,7 @@
 .rune-sheet select:focus {
   border-color: var(--rune-accent);
   outline: none;
+  background: #fff;
 }
 
 .rune-sheet textarea {
@@ -58,9 +66,9 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 12px;
-  background: var(--rune-bg-light);
-  border-bottom: 2px solid var(--rune-accent);
+  padding: 12px 14px;
+  background: var(--rune-bg-dark);
+  border-bottom: 3px solid var(--rune-accent);
 }
 
 .rune-sheet .profile-img {
@@ -82,14 +90,20 @@
 
 .rune-sheet .charname input,
 .rune-sheet .itemname input {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  color: var(--rune-gold);
-  border: none;
-  border-bottom: 1px solid var(--rune-border);
-  border-radius: 0;
+  color: var(--rune-bg);
   background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rune-accent);
+  border-radius: 0;
   padding: 2px 0;
+  font-family: "Georgia", serif;
+  letter-spacing: 1px;
+}
+
+.rune-sheet .charname input::placeholder {
+  color: #9a8a78;
 }
 
 .rune-sheet .header-info {
@@ -105,15 +119,22 @@
 }
 
 .rune-sheet .header-info label {
-  font-size: 10px;
-  color: var(--rune-text-muted);
+  font-size: 9px;
+  color: #9a8a78;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+}
+
+.rune-sheet .header-info input {
+  background: rgba(255,255,255,0.08);
+  border-color: #4a3a2a;
+  color: #e8dcc8;
+  font-size: 12px;
 }
 
 .rune-sheet .item-type-tag {
   font-size: 11px;
-  color: var(--rune-accent);
+  color: var(--rune-accent-light);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -121,36 +142,40 @@
 /* ─── Tabs ──────────────────────────────── */
 .rune-sheet .sheet-tabs {
   display: flex;
-  background: var(--rune-bg-light);
-  border-bottom: 1px solid var(--rune-border);
+  background: var(--rune-bg-card);
+  border-bottom: 2px solid var(--rune-border-dark);
   padding: 0 12px;
 }
 
 .rune-sheet .sheet-tabs .item {
-  padding: 8px 16px;
+  padding: 7px 16px;
   cursor: pointer;
   color: var(--rune-text-muted);
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
-  font-size: 12px;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.15s;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  font-family: "Georgia", serif;
 }
 
 .rune-sheet .sheet-tabs .item:hover {
-  color: var(--rune-text);
+  color: var(--rune-accent);
 }
 
 .rune-sheet .sheet-tabs .item.active {
   color: var(--rune-accent);
   border-bottom-color: var(--rune-accent);
+  font-weight: bold;
 }
 
 /* ─── Sheet Body ────────────────────────── */
 .rune-sheet .sheet-body {
-  padding: 12px;
+  padding: 14px;
   overflow-y: auto;
   max-height: 580px;
+  background: var(--rune-bg);
 }
 
 .rune-sheet .tab {
@@ -166,25 +191,30 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .rune-sheet .status-box {
   background: var(--rune-bg-card);
   border: 1px solid var(--rune-border);
   border-radius: var(--rune-radius);
-  padding: 8px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .rune-sheet .status-box label {
   font-size: 10px;
   color: var(--rune-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  font-family: "Georgia", serif;
 }
+
+.rune-sheet .vigor-box label { color: var(--rune-vigor); }
+.rune-sheet .armadura-box label { color: var(--rune-armadura); }
+.rune-sheet .magica-box label { color: var(--rune-magica); }
 
 .rune-sheet .status-inputs {
   display: flex;
@@ -195,56 +225,121 @@
 .rune-sheet .status-inputs input {
   width: 50px;
   text-align: center;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .rune-sheet .vigor-bar {
   width: 100%;
-  height: 6px;
-  border-radius: 3px;
+  height: 7px;
+  border-radius: 4px;
   appearance: none;
   background: var(--rune-border);
 }
 
 .rune-sheet .vigor-bar::-webkit-progress-bar {
-  background: var(--rune-border);
-  border-radius: 3px;
+  background: #d4c8b4;
+  border-radius: 4px;
 }
 
 .rune-sheet .vigor-bar::-webkit-progress-value {
-  background: var(--rune-accent);
-  border-radius: 3px;
+  background: var(--rune-vigor);
+  border-radius: 4px;
   transition: width 0.3s;
 }
 
-/* ─── Abordagens ────────────────────────── */
-.rune-sheet .abordagens-section h3,
-.rune-sheet .rolagens-individuais h3,
-.rune-sheet .invencoes-section h3,
-.rune-sheet .itens-section h3 {
-  color: var(--rune-gold);
-  font-size: 12px;
+/* ─── Contadores ────────────────────────── */
+.rune-sheet .contadores-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 10px;
+  background: var(--rune-bg-card);
+  border: 1px solid var(--rune-border);
+  border-radius: var(--rune-radius);
+}
+
+.rune-sheet .contador-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.rune-sheet .contador-box label {
+  font-size: 10px;
+  color: var(--rune-text-muted);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 1px solid var(--rune-border);
+  letter-spacing: 0.8px;
+}
+
+.rune-sheet .contador-controles {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rune-sheet .contador-controles input {
+  width: 38px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--rune-accent);
+  background: var(--rune-bg);
+  border: 1px solid var(--rune-border);
+  border-radius: var(--rune-radius);
+  padding: 2px;
+}
+
+.rune-sheet .contador-btn {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1;
+  border-radius: 50%;
+  background: var(--rune-bg-light);
+  border: 1px solid var(--rune-border-dark);
+  color: var(--rune-text);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.rune-sheet .contador-btn:hover {
+  background: var(--rune-accent);
+  border-color: var(--rune-accent);
+  color: #fff;
+}
+
+/* ─── Seções / Títulos ──────────────────── */
+.rune-sheet h3 {
+  color: var(--rune-accent);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid var(--rune-border-dark);
   padding-bottom: 4px;
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: "Georgia", serif;
 }
 
+/* ─── Abordagens ────────────────────────── */
 .rune-sheet .abordagens-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .rune-sheet .abordagem-box {
-  background: var(--rune-bg-card);
-  border: 1px solid var(--rune-border);
+  background: var(--rune-bg-dark);
+  border: 1px solid var(--rune-border-dark);
   border-radius: var(--rune-radius);
-  padding: 8px;
+  padding: 10px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -252,93 +347,116 @@
 }
 
 .rune-sheet .abordagem-box label {
-  font-size: 11px;
-  color: var(--rune-text-muted);
+  font-size: 10px;
+  color: #9a8a78;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 .rune-sheet .abordagem-box input {
-  width: 50px;
+  width: 52px;
   text-align: center;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  color: var(--rune-gold);
+  color: var(--rune-bg);
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--rune-border);
+  border-bottom: 1px solid var(--rune-accent);
   border-radius: 0;
+  padding: 0;
 }
 
 /* ─── Botões ────────────────────────────── */
-.rune-sheet button,
-.rune-sheet .roll-abordagem,
-.rune-sheet .roll-individual,
-.rune-sheet .roll-livre {
+.rune-sheet button {
   background: var(--rune-accent);
   color: #fff;
   border: none;
   border-radius: var(--rune-radius);
-  padding: 4px 10px;
+  padding: 5px 10px;
   cursor: pointer;
   font-size: 11px;
-  transition: background 0.2s;
+  font-family: "Georgia", serif;
+  letter-spacing: 0.5px;
+  transition: background 0.15s;
   width: 100%;
 }
 
-.rune-sheet button:hover,
-.rune-sheet .roll-abordagem:hover,
-.rune-sheet .roll-individual:hover,
-.rune-sheet .roll-livre:hover {
-  background: #c73652;
+.rune-sheet button:hover {
+  background: var(--rune-accent-light);
 }
 
 .rune-sheet .item-create {
-  background: var(--rune-bg-card);
-  color: var(--rune-gold);
-  border: 1px solid var(--rune-border);
+  background: transparent;
+  color: var(--rune-accent);
+  border: 1px solid var(--rune-accent);
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   padding: 0;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1;
   cursor: pointer;
+  flex-shrink: 0;
+}
+
+.rune-sheet .item-create:hover {
+  background: var(--rune-accent);
+  color: #fff;
 }
 
 /* ─── Rolagens Individuais ──────────────── */
 .rune-sheet .dados-row {
   display: flex;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .rune-sheet .dados-row button {
   flex: 1;
+  background: var(--rune-bg-card);
+  color: var(--rune-accent);
+  border: 1px solid var(--rune-border-dark);
+}
+
+.rune-sheet .dados-row button:hover {
+  background: var(--rune-accent);
+  color: #fff;
+  border-color: var(--rune-accent);
 }
 
 /* ─── Lista de Itens ────────────────────── */
+.rune-sheet .itens-section {
+  margin-bottom: 14px;
+}
+
 .rune-sheet .item {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 8px;
+  padding: 5px 8px;
   background: var(--rune-bg-card);
   border: 1px solid var(--rune-border);
   border-radius: var(--rune-radius);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
+  transition: border-color 0.15s;
+}
+
+.rune-sheet .item:hover {
+  border-color: var(--rune-accent);
 }
 
 .rune-sheet .item-name {
   flex: 1;
   font-size: 13px;
+  color: var(--rune-text);
 }
 
 .rune-sheet .item-tag {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--rune-text-muted);
   background: var(--rune-bg-light);
-  padding: 2px 6px;
+  border: 1px solid var(--rune-border);
+  padding: 1px 6px;
   border-radius: 10px;
 }
 
@@ -347,12 +465,14 @@
   align-items: center;
   gap: 4px;
   font-size: 12px;
+  color: var(--rune-text-muted);
 }
 
 .rune-sheet .item-cargas input {
-  width: 36px;
+  width: 34px;
   text-align: center;
   padding: 2px;
+  font-size: 12px;
 }
 
 .rune-sheet .item-controls {
@@ -362,9 +482,9 @@
 
 .rune-sheet .item-controls a {
   cursor: pointer;
-  font-size: 13px;
-  opacity: 0.6;
-  transition: opacity 0.2s;
+  font-size: 12px;
+  opacity: 0.4;
+  transition: opacity 0.15s;
 }
 
 .rune-sheet .item-controls a:hover {
@@ -380,18 +500,19 @@
 }
 
 .rune-sheet .form-group.stacked label {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--rune-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 /* ─── Item Sheet ────────────────────────── */
 .rune-item-sheet .item-body {
-  padding: 12px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background: var(--rune-bg);
 }
 
 .rune-item-sheet .form-group {
@@ -401,10 +522,10 @@
 }
 
 .rune-item-sheet .form-group label {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--rune-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 .rune-item-sheet .inline-inputs {
@@ -420,46 +541,52 @@
 
 /* ─── Chat: Resultado de Rolagem ────────── */
 .rune-roll {
-  background: var(--rune-bg-light, #16213e);
-  border-left: 4px solid #555;
+  background: var(--rune-bg, #f5f0e8);
+  border-left: 4px solid var(--rune-border-dark, #8a7560);
   border-radius: 4px;
   padding: 8px 12px;
   font-size: 13px;
-  color: var(--rune-text, #e0e0e0);
+  color: var(--rune-text, #1e1a14);
+  font-family: "Georgia", serif;
 }
 
 .rune-roll h3 {
   margin: 0 0 6px 0;
-  font-size: 14px;
-  color: var(--rune-gold, #f5a623);
+  font-size: 13px;
+  color: var(--rune-accent, #c8621a);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: none;
 }
 
 .rune-roll hr {
-  border-color: #2a2a4a;
+  border: none;
+  border-top: 1px solid var(--rune-border, #c4b89a);
   margin: 6px 0;
 }
 
 .rune-roll .rune-total {
   font-size: 16px;
+  color: var(--rune-text, #1e1a14);
 }
 
 .rune-roll .rune-descartados {
   font-size: 11px;
-  color: #777;
+  color: #9a8a78;
 }
 
 /* Categorias no chat */
-.rune-roll.rune-sucesso    { border-left-color: var(--rune-success, #4caf50); }
-.rune-roll.rune-complicacao{ border-left-color: var(--rune-complicacao, #ff9800); }
-.rune-roll.rune-desastre   { border-left-color: var(--rune-desastre, #f44336); }
-.rune-roll.rune-gloria     { border-left-color: var(--rune-gloria, #ffd700); }
-.rune-roll.rune-ruina      { border-left-color: var(--rune-ruina, #9c27b0); }
+.rune-roll.rune-sucesso     { border-left-color: #1e8449; }
+.rune-roll.rune-complicacao { border-left-color: #b7770d; }
+.rune-roll.rune-desastre    { border-left-color: #922b21; }
+.rune-roll.rune-gloria      { border-left-color: #b8860b; }
+.rune-roll.rune-ruina       { border-left-color: #6c3483; }
 
-.rune-categoria.rune-sucesso    { color: var(--rune-success); }
-.rune-categoria.rune-complicacao{ color: var(--rune-complicacao); }
-.rune-categoria.rune-desastre   { color: var(--rune-desastre); }
-.rune-categoria.rune-gloria     { color: var(--rune-gloria); }
-.rune-categoria.rune-ruina      { color: var(--rune-ruina); }
+.rune-categoria.rune-sucesso     { color: #1e8449; }
+.rune-categoria.rune-complicacao { color: #b7770d; }
+.rune-categoria.rune-desastre    { color: #922b21; }
+.rune-categoria.rune-gloria      { color: #b8860b; }
+.rune-categoria.rune-ruina       { color: #6c3483; }
 
 /* ─── Dialog de Rolagem ─────────────────── */
 .rune-dialog-roll .form-group {
@@ -478,3 +605,48 @@
   width: 60px;
   text-align: center;
 }
+
+/* ─── NPC Sheet ─────────────────────────── */
+.rune-npc-sheet .npc-body {
+  padding: 14px;
+  background: var(--rune-bg);
+  overflow-y: auto;
+  max-height: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rune-npc-sheet .npc-header-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.rune-npc-sheet .npc-header-info .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rune-npc-sheet .npc-header-info label {
+  font-size: 9px;
+  color: #9a8a78;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rune-npc-sheet .npc-header-info input {
+  background: rgba(255,255,255,0.08);
+  border-color: #4a3a2a;
+  color: #e8dcc8;
+  font-size: 12px;
+}
+
+.rune-npc-sheet .npc-tracos-section textarea,
+.rune-npc-sheet .form-group.stacked textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+

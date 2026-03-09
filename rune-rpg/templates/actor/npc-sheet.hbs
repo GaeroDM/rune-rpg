@@ -1,0 +1,128 @@
+<form class="{{cssClass}} rune-sheet rune-npc-sheet" autocomplete="off">
+
+  {{!-- Header --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="Nome do NPC"/>
+      </h1>
+      <div class="npc-header-info">
+        <div class="form-group">
+          <label>Tipo</label>
+          <input type="text" name="system.tipo" value="{{system.tipo}}" placeholder="Ex: Guarda, Monstro..."/>
+        </div>
+        <div class="form-group">
+          <label>Nível de Ameaça</label>
+          <input type="text" name="system.ameaca" value="{{system.ameaca}}" placeholder="Baixo / Médio / Alto"/>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="npc-body">
+
+    {{!-- Status --}}
+    <div class="status-row">
+      <div class="status-box vigor-box">
+        <label>❤️ VIGOR</label>
+        <div class="status-inputs">
+          <input class="vigor-input" type="number" data-field="value"
+            value="{{system.vigor.value}}" min="0" max="{{system.vigor.max}}"/>
+          <span>/</span>
+          <input class="vigor-input" type="number" data-field="max"
+            value="{{system.vigor.max}}" min="0"/>
+        </div>
+        <progress class="vigor-bar" value="{{system.vigor.value}}" max="{{system.vigor.max}}"></progress>
+      </div>
+      <div class="status-box armadura-box">
+        <label>🛡️ ARMADURA</label>
+        <input type="number" name="system.resistencias.armadura"
+          value="{{system.resistencias.armadura}}" min="0"/>
+      </div>
+      <div class="status-box magica-box">
+        <label>🔷 RES. MÁGICA</label>
+        <input type="number" name="system.resistencias.res_magica"
+          value="{{system.resistencias.res_magica}}" min="0"/>
+      </div>
+    </div>
+
+    {{!-- Abordagens + Contadores --}}
+    <div class="npc-rolls-section">
+      <h3>Abordagens</h3>
+
+      <div class="contadores-row">
+        <div class="contador-box">
+          <label>Vantagens</label>
+          <div class="contador-controles">
+            <button type="button" class="contador-btn" data-tipo="vantagem" data-dir="down">−</button>
+            <input type="number" value="{{vantagens}}" min="0" readonly/>
+            <button type="button" class="contador-btn" data-tipo="vantagem" data-dir="up">+</button>
+          </div>
+        </div>
+        <div class="contador-box">
+          <label>Desvantagens</label>
+          <div class="contador-controles">
+            <button type="button" class="contador-btn" data-tipo="desvantagem" data-dir="down">−</button>
+            <input type="number" value="{{desvantagens}}" min="0" readonly/>
+            <button type="button" class="contador-btn" data-tipo="desvantagem" data-dir="up">+</button>
+          </div>
+        </div>
+        <div class="contador-box">
+          <label>Bônus (d4)</label>
+          <div class="contador-controles">
+            <button type="button" class="contador-btn" data-tipo="bonus" data-dir="down">−</button>
+            <input type="number" value="{{bonus}}" min="0" readonly/>
+            <button type="button" class="contador-btn" data-tipo="bonus" data-dir="up">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="abordagens-grid">
+        <div class="abordagem-box">
+          <label>Poder</label>
+          <input type="number" name="system.abordagens.poder" value="{{system.abordagens.poder}}" min="0"/>
+          <button type="button" class="roll-abordagem" data-abordagem="poder">🎲 Rolar</button>
+        </div>
+        <div class="abordagem-box">
+          <label>Astúcia</label>
+          <input type="number" name="system.abordagens.astucia" value="{{system.abordagens.astucia}}" min="0"/>
+          <button type="button" class="roll-abordagem" data-abordagem="astucia">🎲 Rolar</button>
+        </div>
+        <div class="abordagem-box">
+          <label>Visão</label>
+          <input type="number" name="system.abordagens.visao" value="{{system.abordagens.visao}}" min="0"/>
+          <button type="button" class="roll-abordagem" data-abordagem="visao">🎲 Rolar</button>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Traços / Habilidades --}}
+    <div class="npc-tracos-section">
+      <h3>Traços & Habilidades</h3>
+      <textarea name="system.tracos" rows="4" placeholder="Descreva as habilidades especiais, traços e comportamentos deste NPC...">{{system.tracos}}</textarea>
+    </div>
+
+    {{!-- Itens --}}
+    <div class="npc-itens-section">
+      <h3>Itens & Armas <button type="button" class="item-create" data-tipo="arma">+</button></h3>
+      {{#each actor.items}}
+      <div class="item" data-item-id="{{this.id}}">
+        <span class="item-name">{{this.name}}</span>
+        <span class="item-tag">{{this.type}}</span>
+        <div class="item-controls">
+          <a class="item-edit">✏️</a>
+          <a class="item-delete">🗑️</a>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+    {{!-- Anotações --}}
+    <div class="form-group stacked">
+      <label>Anotações do Mestre</label>
+      <textarea name="system.anotacoes" rows="3" placeholder="Notas privadas sobre este NPC...">{{system.anotacoes}}</textarea>
+    </div>
+
+  </div>
+</form>

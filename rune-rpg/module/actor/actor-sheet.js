@@ -2,8 +2,16 @@ import { RuneRollHandler } from "../dice/roll-handler.js";
 
 export class RuneActorSheet extends ActorSheet {
 
+  constructor(...args) {
+    super(...args);
+    // Estado local dos contadores (zera após rolagem)
+    this._vantagens = 0;
+    this._desvantagens = 0;
+    this._bonus = 0;
+  }
+
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["rune-rpg", "sheet", "actor"],
       template: "systems/rune-rpg/templates/actor/character-sheet.hbs",
       width: 650,
@@ -22,6 +30,10 @@ export class RuneActorSheet extends ActorSheet {
       { key: "astucia", label: "Astúcia" },
       { key: "visao", label: "Visão" }
     ];
+    // Passa contadores para o template
+    context.vantagens = this._vantagens;
+    context.desvantagens = this._desvantagens;
+    context.bonus = this._bonus;
     return context;
   }
 
@@ -30,28 +42,44 @@ export class RuneActorSheet extends ActorSheet {
 
     if (!this.isEditable) return;
 
-    // Rolagem de abordagem
+    // Rolagem de abordagem (instantânea)
     html.find(".roll-abordagem").click(ev => this._onRollAbordagem(ev));
 
     // Rolagem individual de dado
     html.find(".roll-individual").click(ev => this._onRollIndividual(ev));
 
-    // Rolagem livre (dialog)
-    html.find(".roll-livre").click(ev => this._onRollLivre(ev));
+    // Contadores
+    html.find(".contador-vantagem").on("change", ev => {
+      this._vantagens = Math.max(0, parseInt(ev.currentTarget.value) || 0);
+      this.render(false);
+    });
+    html.find(".contador-desvantagem").on("change", ev => {
+      this._desvantagens = Math.max(0, parseInt(ev.currentTarget.value) || 0);
+      this.render(false);
+    });
+    html.find(".contador-bonus").on("change", ev => {
+      this._bonus = Math.max(0, parseInt(ev.currentTarget.value) || 0);
+      this.render(false);
+    });
 
-    // Edição inline de vigor
+    // Botões +/- dos contadores
+    html.find(".contador-btn").click(ev => {
+      const btn = ev.currentTarget;
+      const tipo = btn.dataset.tipo;
+      const delta = btn.dataset.dir === "up" ? 1 : -1;
+      if (tipo === "vantagem") this._vantagens = Math.max(0, this._vantagens + delta);
+      if (tipo === "desvantagem") this._desvantagens = Math.max(0, this._desvantagens + delta);
+      if (tipo === "bonus") this._bonus = Math.max(0, this._bonus + delta);
+      this.render(false);
+    });
+
+    // Vigor
     html.find(".vigor-input").change(ev => this._onVigorChange(ev));
 
-    // Adicionar item
+    // Itens
     html.find(".item-create").click(ev => this._onItemCreate(ev));
-
-    // Deletar item
     html.find(".item-delete").click(ev => this._onItemDelete(ev));
-
-    // Editar item
     html.find(".item-edit").click(ev => this._onItemEdit(ev));
-
-    // Atualizar cargas de invenção
     html.find(".carga-input").change(ev => this._onCargaChange(ev));
   }
 
@@ -63,13 +91,20 @@ export class RuneActorSheet extends ActorSheet {
     const abordagemValor = this.actor.system.abordagens[abordagemKey];
     const label = `Rolagem de ${abordagemKey.charAt(0).toUpperCase() + abordagemKey.slice(1)}`;
 
-    // Abre dialog para configurar a rolagem
-    await this._dialogRolagem({ abordagem: abordagemValor, label });
-  }
+    await RuneRollHandler.roll({
+      abordagem: abordagemValor,
+      vantagens: this._vantagens,
+      desvantagens: this._desvantagens,
+      bonus: this._bonus,
+      actor: this.actor,
+      label
+    });
 
-  async _onRollLivre(ev) {
-    ev.preventDefault();
-    await this._dialogRolagem({ abordagem: 0, label: "Rolagem Livre" });
+    // Zera contadores após rolagem
+    this._vantagens = 0;
+    this._desvantagens = 0;
+    this._bonus = 0;
+    this.render(false);
   }
 
   async _onRollIndividual(ev) {
@@ -77,59 +112,6 @@ export class RuneActorSheet extends ActorSheet {
     const formula = ev.currentTarget.dataset.formula ?? "1d6";
     const label = ev.currentTarget.dataset.label ?? "Rolagem Individual";
     await RuneRollHandler.rollIndividual(formula, label);
-  }
-
-  async _dialogRolagem({ abordagem, label }) {
-    const content = `
-      <form class="rune-dialog-roll">
-        <div class="form-group">
-          <label>Abordagem</label>
-          <input type="number" name="abordagem" value="${abordagem}" min="0"/>
-        </div>
-        <div class="form-group">
-          <label>Vantagens</label>
-          <input type="number" name="vantagens" value="0" min="0"/>
-        </div>
-        <div class="form-group">
-          <label>Desvantagens</label>
-          <input type="number" name="desvantagens" value="0" min="0"/>
-        </div>
-        <div class="form-group">
-          <label>Bônus (d4)</label>
-          <input type="number" name="bonus" value="0" min="0"/>
-        </div>
-      </form>
-    `;
-
-    new Dialog({
-      title: label,
-      content,
-      buttons: {
-        rolar: {
-          label: "Rolar",
-          callback: async (html) => {
-            const form = html.find("form")[0];
-            const abordagemFinal = parseInt(form.abordagem.value) || 0;
-            const vantagens = parseInt(form.vantagens.value) || 0;
-            const desvantagens = parseInt(form.desvantagens.value) || 0;
-            const bonus = parseInt(form.bonus.value) || 0;
-
-            await RuneRollHandler.roll({
-              abordagem: abordagemFinal,
-              vantagens,
-              desvantagens,
-              bonus,
-              actor: this.actor,
-              label
-            });
-          }
-        },
-        cancelar: {
-          label: "Cancelar"
-        }
-      },
-      default: "rolar"
-    }).render(true);
   }
 
   // ─── Vigor ──────────────────────────────────────────────────
@@ -145,10 +127,7 @@ export class RuneActorSheet extends ActorSheet {
   async _onItemCreate(ev) {
     ev.preventDefault();
     const tipo = ev.currentTarget.dataset.tipo ?? "equipamento";
-    const itemData = {
-      name: `Nova ${tipo}`,
-      type: tipo
-    };
+    const itemData = { name: `Nova ${tipo}`, type: tipo };
     await Item.create(itemData, { parent: this.actor });
   }
 
