@@ -2,7 +2,7 @@
   "id": "rune-rpg",
   "title": "RUNE RPG",
   "description": "Sistema oficial de RUNE RPG para Foundry VTT",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "compatibility": {
     "minimum": "12",
     "verified": "12"
