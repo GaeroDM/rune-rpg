@@ -1,0 +1,28 @@
+{
+  "id": "rune-rpg",
+  "title": "RUNE RPG",
+  "description": "Sistema oficial de RUNE RPG para Foundry VTT",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "authors": [
+    {
+      "name": "Gaero"
+    }
+  ],
+  "esmodules": ["rune.js"],
+  "styles": ["rune.css"],
+  "languages": [
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ],
+  "socket": false,
+  "url": "https://github.com/GaeroDM/rune-rpg",
+  "manifest": "https://github.com/GaeroDM/rune-rpg/blob/main/rune-rpg/system.json",
+  "download": "https://github.com/GaeroDM/rune-rpg/releases/latest/download/rune-rpg.zip"
+}
