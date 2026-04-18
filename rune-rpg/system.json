@@ -23,6 +23,6 @@
   ],
   "socket": false,
   "url": "",
-  "manifest": "https://github.com/GaeroDM/rune-rpg/blob/main/rune-rpg/system.json",
+  "manifest": "https://raw.githubusercontent.com/GaeroDM/rune-rpg/refs/heads/main/rune-rpg/system.json",
   "download": "https://github.com/GaeroDM/rune-rpg/releases/latest/download/rune-rpg.zip"
 }
